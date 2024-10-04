@@ -9,7 +9,7 @@ export default function Notes(props){
   return (
     <main>
       <h1>{notesData[activeNote].title}</h1>
-      <p className="notes-textarea" name="" id="" >{notesData[activeNote].content}</p>
+      <p className="notes-textarea">{notesData[activeNote].content}</p>
     </main>
   )
 }

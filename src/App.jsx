@@ -9,6 +9,7 @@ export default function App() {
   const [notesData, setNotesData] = useState(data)
   const [currentNote, setCurrentNote] = useState(0);
 
+  // Set Active Tab to pass to children props
   function clickActiveTab(note) {
     setCurrentNote(note.id - 1)
   }
