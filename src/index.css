@@ -27,27 +27,34 @@
 .split-wrapper {
   display: flex;
   flex-direction: row;
+  /* gap: 20px; */
   height: 100%;
+  border: 1px solid #e2e2e2;
+  box-shadow: 10px 0px 30px rgb(0, 0, 0, 0.1);
+  border-radius: .75rem;
 }
+.gutter {
+  background-color: transparent;
+  transform: translateX(-50%);
+  cursor: col-resize;
+}
+
 aside {
   width: 400px;
   color: #242424;
-  box-shadow: 0px 0px 20px rgb(0, 0, 0, 0.1);
-  border: 1px solid #e2e2e2;
   border-radius: .75rem;
+  border-right: 1px solid #e2e2e2;
+  box-shadow: 10px 0px 40px rgb(0, 0, 0, 0.01);
   display: flex;
   flex-direction: column;
 }
 main {
   width: 100%;
   color: #242424; 
-  border: 1px solid #e2e2e2;
-  box-shadow: 10px 0px 30px rgb(0, 0, 0, 0.1);
-  border-radius: .75rem;
   padding: 6rem 10vw;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 .txt-thumbs-date {
   font-size: 12px;
@@ -121,6 +128,11 @@ h1 {
   font-size: 1rem;
   font-weight: 400;
   line-height: 160%;
+}
+.notes-textarea.h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  height: fit-content;
 }
 .notes-textarea:hover {
   border: none;

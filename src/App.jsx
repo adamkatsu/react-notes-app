@@ -9,6 +9,11 @@ export default function App() {
   const [notesData, setNotesData] = useState(data)
   const [currentNote, setCurrentNote] = useState(0);
 
+  const updateState = (newState) => {
+    setNotesData(newState);
+  };
+  console.log(notesData)
+
   // Set Active Tab to pass to children props
   function clickActiveTab(note) {
     setCurrentNote(note.id - 1)
@@ -16,10 +21,11 @@ export default function App() {
 
   return (
     <>
-    <Split className='split-wrapper'
+    <Split 
+      className='split-wrapper'
       sizes={[25, 75]}
       minSize={[240, 640]}
-      expandToMin={false}
+      expandToMin={false} 
       gutterSize={8}
       gutterAlign="center"
       snapOffset={25}
@@ -27,8 +33,9 @@ export default function App() {
       direction="horizontal"
       cursor="col-resize"
     >
+      {/* <div></div> */}
       <Sidebar data={notesData} handleClick={clickActiveTab} currentNote={currentNote}/>
-      <Notes data={notesData} currentNote={currentNote}/>
+      <Notes data={notesData} currentNote={currentNote} updateParentState={updateState}/>
     </Split>
     </>
   )

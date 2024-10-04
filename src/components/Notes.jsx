@@ -1,15 +1,48 @@
-import { useEffect } from "react"
+import { useState } from "react"
 
 export default function Notes(props){
-  const notesData = props.data
-  let activeNote = props.currentNote
+  const [notesData, setNotesData] = useState(props.data);
+  let activeNote = props.currentNote;
+  const [activeTab, setActiveTab] = useState(notesData[activeNote])
   
-  console.log(props.currentNote)
+  function updateData(event){
+    notesData.map((x) => {
+      
+      const currentIndex = x.id -1
+      {currentIndex === activeNote && 
+        console.log(x)
+      }
+    })
+  }
+  
+  // function updateData(event){
+  //   const inputTitle = event.target.name
+  //   const inputValue = event.target.value
+
+  //   setActiveTab((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       [inputTitle] : inputValue
+  //     }
+  //   })
+  // }
+  
+  // console.log(active)
 
   return (
     <main>
-      <h1>{notesData[activeNote].title}</h1>
-      <p className="notes-textarea">{notesData[activeNote].content}</p>
+      <input 
+        className="notes-textarea h1" 
+        name='title' 
+        defaultValue={notesData[activeNote].title} 
+        onChange={updateData}
+      />
+      <textarea 
+        className="notes-textarea" 
+        name='content' 
+        defaultValue={notesData[activeNote].content} 
+        onChange={updateData}
+      />
     </main>
   )
 }
