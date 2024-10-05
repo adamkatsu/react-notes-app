@@ -1,47 +1,50 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Notes(props){
   const [notesData, setNotesData] = useState(props.data);
-  let activeNote = props.currentNote;
-  const [activeTab, setActiveTab] = useState(notesData[activeNote])
-  
-  function updateData(event){
-    notesData.map((x) => {
-      
-      const currentIndex = x.id -1
-      {currentIndex === activeNote && 
-        console.log(x)
-      }
-    })
-  }
-  
-  // function updateData(event){
-  //   const inputTitle = event.target.name
-  //   const inputValue = event.target.value
+  let currentId = props.currentNote;
+  const [currentTab, setCurrentTab] = useState(notesData[currentId])
 
-  //   setActiveTab((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       [inputTitle] : inputValue
-  //     }
-  //   })
-  // }
-  
-  // console.log(active)
+  // Keep currentTab in sync with notesData[currentId] when currentId changes
+  useEffect(() => {
+    setCurrentTab(notesData[currentId]);
+  }, [currentId, notesData]);
+
+  function handleNoteChange(event) {
+
+    const updatedTab = {
+      ...currentTab,
+      [event.target.name]: event.target.value
+    };
+
+    // Update the notesData array to reflect the change
+    const updatedNotes = notesData.map((note, index) => 
+      index === currentId ? updatedTab : note
+    );
+
+    // Update the state with the modified notes
+    setNotesData(updatedNotes);
+
+    setCurrentTab((updatedTab))
+
+    // Notify the parent of the change
+    props.handleChange(updatedTab)
+  }
+
 
   return (
     <main>
       <input 
         className="notes-textarea h1" 
         name='title' 
-        defaultValue={notesData[activeNote].title} 
-        onChange={updateData}
+        value={currentTab.title}
+        onChange={handleNoteChange}
       />
       <textarea 
         className="notes-textarea" 
         name='content' 
-        defaultValue={notesData[activeNote].content} 
-        onChange={updateData}
+        value={currentTab.content} 
+        onChange={handleNoteChange}
       />
     </main>
   )

@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export default function Sidebar(props) {
-  const notesData = props.data
+  let notesData = props.data
   
   return (
     <aside>
